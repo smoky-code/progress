@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="loadBody">
+        <div class="loading-box">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <h6>Please Wait</h6>
+            <div class="proBody">
+                <progress max="8" value="0"></progress><em>0%</em>
+            </div>
+        </div>
+    </div>
+    <img src="https://lagrange-point.jp/cms2016/wp-content/uploads/2022/06/img1-scaled.jpg" alt="">
+    <img src="https://lagrange-point.jp/cms2016/wp-content/uploads/2022/06/img2-scaled.jpg" alt="">
+    <img src="https://lagrange-point.jp/cms2016/wp-content/uploads/2022/06/img3-scaled.jpg" alt="">
+    <img src="https://lagrange-point.jp/cms2016/wp-content/uploads/2022/06/img4-scaled.jpg" alt="">
+    <img src="https://lagrange-point.jp/cms2016/wp-content/uploads/2022/06/img5-scaled.jpg" alt="">
+    <img src="https://lagrange-point.jp/cms2016/wp-content/uploads/2022/06/img6-scaled.jpg" alt="">
+    <img src="https://lagrange-point.jp/cms2016/wp-content/uploads/2022/06/img7-scaled.jpg" alt="">
+    <img src="https://lagrange-point.jp/cms2016/wp-content/uploads/2022/06/img8-scaled.jpg" alt="">
+    <script>
+        let imgArray = $("img");
+        let imgCount = imgArray.length;
+        let loadCount = 0;
+        let loadingRate = "0%";
+        let nowTime = new Date();
+
+        for(i=0;i<imgCount;i++){
+            imgArray.eq(i).on("load",function(){
+                loadCount++;
+                loadTime = new Date();
+                $("progress").val(loadCount);
+
+                loadingRate = 100 / imgCount * loadCount + "%";
+                $(".loading-box em").text(loadingRate);
+
+                if(loadCount == imgCount){
+                    if(loadTime - nowTime < 1500){
+                        setTimeout(function(){
+                            $(".loadBody").fadeOut(1500);
+                        },1500);
+
+                    }else{
+                        $(".loadBody").fadeOut(1500);
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+</html>
